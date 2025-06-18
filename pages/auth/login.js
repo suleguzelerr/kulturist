@@ -30,7 +30,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-slate-100 flex items-center justify-center px-4">
       <div className="max-w-md w-full">
         <div className="card">
           <div className="text-center mb-8">
@@ -88,7 +88,7 @@ export default function LoginPage() {
           <div className="mt-8 text-center">
             <p className="text-gray-600">
               Hesabınız yok mu?{" "}
-              <Link href="/auth/register" className="text-primary-600 hover:text-primary-700 font-medium">
+              <Link href="/auth/register" className="text-blue-600 hover:text-blue-700 font-medium">
                 Kayıt olun
               </Link>
             </p>

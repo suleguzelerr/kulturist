@@ -17,6 +17,7 @@ model User {
   messagesSent     Message[]   @relation("SentMessages")
   messagesReceived Message[]   @relation("ReceivedMessages")
   notifications    Notification[]              // Kullanıcının bildirimleri
+  testimonials     Testimonial[]               // Kullanıcının yorumları
 }
 
 model Event {
@@ -63,6 +64,19 @@ model Notification {
   read      Boolean  @default(false)
   createdAt DateTime @default(now())
 
-  eventId   Int?     // ✅ Bildirimle ilişkili etkinlik ID’si
+  eventId   Int?     // ✅ Bildirimle ilişkili etkinlik ID'si
   event     Event?   @relation(fields: [eventId], references: [id])
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  content   String
+  rating    Int      @default(5) // 1-5 arası puan
+  author    String   // Yazar adı
+  role      String   // Yazarın rolü (Kültür Tutkunu, Organizatör vb.)
+  approved  Boolean  @default(false) // Admin onayı
+  createdAt DateTime @default(now())
+  
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
 }

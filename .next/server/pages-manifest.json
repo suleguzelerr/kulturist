@@ -3,8 +3,14 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/auth/login": "pages/auth/login.js",
+  "/api/testimonials": "pages/api/testimonials.js",
+  "/api/events/approved": "pages/api/events/approved.js",
   "/auth/register": "pages/auth/register.js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/api/events/approved": "pages/api/events/approved.js"
+  "/about": "pages/about.js",
+  "/notifications": "pages/notifications.js",
+  "/api/notifications/read": "pages/api/notifications/read.js",
+  "/api/notifications": "pages/api/notifications.js",
+  "/events/[id]": "pages/events/[id].js",
+  "/api/events/[id]/messages": "pages/api/events/[id]/messages.js",
+  "/api/events/[id]": "pages/api/events/[id].js"
 }
