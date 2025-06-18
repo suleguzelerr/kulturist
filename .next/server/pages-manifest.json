@@ -2,15 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/api/testimonials": "pages/api/testimonials.js",
-  "/api/events/approved": "pages/api/events/approved.js",
-  "/auth/register": "pages/auth/register.js",
-  "/about": "pages/about.js",
-  "/notifications": "pages/notifications.js",
-  "/api/notifications/read": "pages/api/notifications/read.js",
-  "/api/notifications": "pages/api/notifications.js",
-  "/events/[id]": "pages/events/[id].js",
-  "/api/events/[id]/messages": "pages/api/events/[id]/messages.js",
-  "/api/events/[id]": "pages/api/events/[id].js"
+  "/admin/users": "pages/admin/users.js",
+  "/admin/dashboard": "pages/admin/dashboard.js",
+  "/admin/events": "pages/admin/events.js"
 }

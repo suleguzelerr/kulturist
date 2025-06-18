@@ -10,6 +10,8 @@ export default function HomePage() {
   const [categories] = useState(["Konser", "Tiyatro", "Festival", "Sergi", "Workshop"]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
     const fetchApprovedEvents = async () => {
@@ -407,6 +409,28 @@ export default function HomePage() {
         onClose={() => setIsModalOpen(false)}
         onSuccess={handleTestimonialSuccess}
       />
+
+      <div className="bg-gray-50 rounded-lg p-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Şifreyi Değiştir (isteğe bağlı)
+        </label>
+        <input
+          type="password"
+          placeholder="Yeni şifre (en az 6 karakter)"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          minLength={6}
+          className="input-field mb-2"
+        />
+        <input
+          type="password"
+          placeholder="Yeni şifre tekrar"
+          value={confirmPassword}
+          onChange={e => setConfirmPassword(e.target.value)}
+          minLength={6}
+          className="input-field"
+        />
+      </div>
     </div>
   );
 } 

@@ -1,18 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
 import withRole from '../../lib/withRole'
 import Link from 'next/link'
 
 function AdminDashboard() {
-  const [user, setUser] = useState(null)
+  const { data: session, status } = useSession()
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user')
-    if (storedUser) {
-      setUser(JSON.parse(storedUser))
-    }
-  }, [])
-
-  if (!user) {
+  if (status === 'loading') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 flex items-center justify-center">
         <div className="text-center">
@@ -29,16 +22,10 @@ function AdminDashboard() {
         <div className="card">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-800 mb-2">👑 Admin Paneli</h1>
-            <p className="text-gray-600">Hoş geldin, {user.email}</p>
+            <p className="text-gray-600">Hoş geldin, {session?.user?.email}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
-              <div className="text-3xl mb-3">📊</div>
-              <h3 className="text-lg font-semibold text-blue-800 mb-2">İstatistikler</h3>
-              <p className="text-blue-600 text-sm">Sistem istatistiklerini görüntüleyin</p>
-            </div>
-
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
               <div className="text-3xl mb-3">✅</div>
               <h3 className="text-lg font-semibold text-green-800 mb-2">Etkinlik Onayları</h3>
@@ -56,6 +43,11 @@ function AdminDashboard() {
             <Link href="/admin/events">
               <button className="btn-primary">
                 🎭 Etkinlikleri Yönet
+              </button>
+            </Link>
+            <Link href="/admin/users">
+              <button className="btn-primary">
+                👥 Kullanıcıları Yönet
               </button>
             </Link>
             <Link href="/">
