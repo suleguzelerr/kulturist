@@ -2,12 +2,17 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/admin/dashboard": "pages/admin/dashboard.js",
-  "/": "pages/index.js",
   "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
+  "/auth/login": "pages/auth/login.js",
+  "/": "pages/index.js",
   "/api/notifications": "pages/api/notifications.js",
+  "/api/events/approved": "pages/api/events/approved.js",
+  "/api/testimonials": "pages/api/testimonials.js",
   "/events/[id]": "pages/events/[id].js",
   "/api/events/[id]": "pages/api/events/[id].js",
   "/api/events/[id]/messages": "pages/api/events/[id]/messages.js",
-  "/api/messages/send": "pages/api/messages/send.js"
+  "/events": "pages/events.js",
+  "/api/events": "pages/api/events.js",
+  "/admin/events": "pages/admin/events.js",
+  "/api/events/delete": "pages/api/events/delete.js"
 }

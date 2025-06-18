@@ -36,13 +36,13 @@ model Event {
   updatedAt      DateTime        @updatedAt
 
   messages       Message[]       // Etkinliğe ait mesajlar
-  notifications  Notification[]  // ✅ Bildirimlerle ilişki
+  notifications  Notification[]  // Bildirimlerle ilişki
 }
 
 model Message {
   id         Int      @id @default(autoincrement())
   content    String
-  event      Event    @relation(fields: [eventId], references: [id])
+  event      Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId    Int
   sender     User     @relation("SentMessages", fields: [senderId], references: [id])
   senderId   Int
@@ -64,8 +64,8 @@ model Notification {
   read      Boolean  @default(false)
   createdAt DateTime @default(now())
 
-  eventId   Int?     // ✅ Bildirimle ilişkili etkinlik ID'si
-  event     Event?   @relation(fields: [eventId], references: [id])
+  eventId   Int?
+  event     Event?   @relation(fields: [eventId], references: [id], onDelete: Cascade)
 }
 
 model Testimonial {
