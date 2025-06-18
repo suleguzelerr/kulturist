@@ -178,94 +178,81 @@ export default function EventDetailPage() {
           <h2 className="text-2xl font-bold text-gray-800 mb-6">💬 Etkinlik Hakkında Mesajlar</h2>
           
           {messages.length === 0 ? (
-            <div className="text-center py-8">
-              <div className="text-4xl mb-4">💭</div>
-              <p className="text-gray-500">Henüz mesaj yok. İlk mesajı siz gönderin!</p>
+            <div className="flex flex-col items-center justify-center py-12 bg-white rounded-xl border border-gray-200 shadow-sm">
+              <div className="text-5xl mb-4">💭</div>
+              <p className="text-xl text-gray-500 mb-2">Henüz mesaj yok</p>
+              <p className="text-gray-400">İlk mesajı siz gönderebilirsiniz!</p>
             </div>
           ) : (
             <div className="space-y-4 mb-8">
-              {messages.map((msg) => (
-                <div key={msg.id} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="flex items-center">
-                      <span className="font-medium text-gray-800">{msg.sender.email}</span>
-                      <span className="ml-2 text-xs text-gray-500">
-                        {new Date(msg.createdAt).toLocaleString("tr-TR")}
-                      </span>
+              {messages.map((msg) => {
+                const isMe = session && msg.sender.email === session.user.email;
+                return (
+                  <div key={msg.id} className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}> 
+                    <div className={`max-w-lg w-fit ${isMe ? 'bg-blue-100 border-blue-200 ml-auto' : 'bg-gray-50 border-gray-200 mr-auto'} border rounded-2xl p-4 shadow-sm relative`}>
+                      <div className="flex items-center mb-1">
+                        <span className={`font-semibold text-sm ${isMe ? 'text-blue-700' : 'text-gray-800'}`}>{isMe ? 'Ben' : msg.sender.email}</span>
+                        <span className="ml-2 text-xs text-gray-400">{new Date(msg.createdAt).toLocaleString("tr-TR")}</span>
+                      </div>
+                      {msg.parentMessageId && (
+                        <div className="mb-2 p-2 bg-gray-100 border-l-4 border-blue-300 rounded">
+                          <span className="text-xs text-gray-500">Cevaplanan: </span>
+                          <span className="text-xs text-gray-700 italic">{messages.find(m => m.id === msg.parentMessageId)?.content?.slice(0, 60) || '...'}</span>
+                        </div>
+                      )}
+                      <p className="text-gray-700 whitespace-pre-line">{msg.content}</p>
+                      {status === 'authenticated' && !isMe && (
+                        <button
+                          onClick={() => {
+                            setReplyingTo(msg);
+                            setMessage(`@${msg.sender.email} `);
+                          }}
+                          className="absolute right-2 bottom-2 text-xs text-blue-600 hover:text-blue-800 font-medium"
+                        >
+                          Cevapla
+                        </button>
+                      )}
                     </div>
-                    {status === 'authenticated' && (
-                      <button
-                        onClick={() => {
-                          setReplyingTo(msg);
-                          setMessage(`@${msg.sender.email} `);
-                        }}
-                        className="text-sm text-primary-600 hover:text-primary-700 font-medium"
-                      >
-                        Cevapla
-                      </button>
-                    )}
                   </div>
-                  <p className="text-gray-700">{msg.content}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
 
-          {status === 'authenticated' ? (
-            <div>
-              {replyingTo && (
-                <div className="bg-primary-50 border border-primary-200 rounded-lg p-4 mb-4">
-                  <p className="text-sm text-primary-700">
-                    <strong>Cevap yazılıyor:</strong> {replyingTo.sender.email}
-                  </p>
-                  <button
-                    onClick={() => setReplyingTo(null)}
-                    className="text-xs text-primary-600 hover:text-primary-700 mt-1"
-                  >
-                    İptal et
-                  </button>
-                </div>
-              )}
-
-              <form onSubmit={handleMessageSubmit} className="space-y-4">
+          {/* Mesaj gönderme formu */}
+          <div className="mt-6">
+            {replyingTo && (
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 flex items-center justify-between">
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    {replyingTo ? `Cevap yaz → ${replyingTo.sender.email}` : 'Etkinlik Hakkında Mesaj Gönder'}
-                  </label>
-                  <textarea
-                    id="message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Etkinlik hakkında mesaj yazın..."
-                    rows={4}
-                    className="input-field resize-none"
-                  />
+                  <span className="text-xs text-blue-700 font-semibold">Cevap yazılıyor: </span>
+                  <span className="text-xs text-blue-900">{replyingTo.sender.email}</span>
+                  <span className="ml-2 text-gray-500 text-xs italic">{replyingTo.content.slice(0, 60)}</span>
                 </div>
-
-                {feedback && (
-                  <div className={`p-3 rounded-lg ${
-                    feedback.includes('✅') 
-                      ? 'bg-green-50 border border-green-200 text-green-700' 
-                      : 'bg-red-50 border border-red-200 text-red-700'
-                  }`}>
-                    <p className="text-sm">{feedback}</p>
-                  </div>
-                )}
-
-                <button type="submit" className="btn-primary">
-                  Mesaj Gönder
+                <button
+                  onClick={() => setReplyingTo(null)}
+                  className="text-xs text-blue-600 hover:text-blue-800 ml-4"
+                >
+                  İptal
                 </button>
-              </form>
-            </div>
-          ) : (
-            <div className="text-center py-8 bg-gray-50 rounded-lg">
-              <div className="text-4xl mb-4">🔒</div>
-              <p className="text-gray-600 mb-4">Mesaj göndermek için giriş yapmalısınız.</p>
-              <Link href="/auth/login">
-                <button className="btn-primary">Giriş Yap</button>
-              </Link>
-            </div>
-          )}
+              </div>
+            )}
+            <form onSubmit={handleMessageSubmit} className="flex flex-col md:flex-row gap-3 items-end">
+              <textarea
+                id="message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Etkinlik hakkında mesaj yazın..."
+                rows={2}
+                className="input-field flex-1 resize-none"
+              />
+              <button type="submit" className="btn-primary px-6 py-2 h-fit">Mesaj Gönder</button>
+            </form>
+            {feedback && (
+              <div className={`mt-2 p-3 rounded-lg ${feedback.includes('✅') ? 'bg-green-50 border border-green-200 text-green-700' : 'bg-red-50 border border-red-200 text-red-700'}`}>
+                <p className="text-sm">{feedback}</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

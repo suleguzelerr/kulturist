@@ -2,7 +2,12 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/admin/users": "pages/admin/users.js",
   "/admin/dashboard": "pages/admin/dashboard.js",
-  "/admin/events": "pages/admin/events.js"
+  "/": "pages/index.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
+  "/api/notifications": "pages/api/notifications.js",
+  "/events/[id]": "pages/events/[id].js",
+  "/api/events/[id]": "pages/api/events/[id].js",
+  "/api/events/[id]/messages": "pages/api/events/[id]/messages.js",
+  "/api/messages/send": "pages/api/messages/send.js"
 }
