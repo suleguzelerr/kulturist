@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id               Int              @id @default(autoincrement())
+  email            String           @unique
+  password         String
+  role             String           @default("user")
+
+  events           Event[]                     // Kullanıcının oluşturduğu etkinlikler
+  messagesSent     Message[]   @relation("SentMessages")
+  messagesReceived Message[]   @relation("ReceivedMessages")
+  notifications    Notification[]              // Kullanıcının bildirimleri
+}
+
+model Event {
+  id             Int             @id @default(autoincrement())
+  title          String
+  description    String
+  date           DateTime
+  location       String
+  image          String?
+  status         String          @default("pending")
+  createdBy      User            @relation(fields: [createdById], references: [id])
+  createdById    Int
+  category       String?
+
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  messages       Message[]       // Etkinliğe ait mesajlar
+  notifications  Notification[]  // ✅ Bildirimlerle ilişki
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  content    String
+  event      Event    @relation(fields: [eventId], references: [id])
+  eventId    Int
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id])
+  senderId   Int
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  receiverId Int
+  createdAt  DateTime @default(now())
+
+  parentMessage   Message?  @relation("Replies", fields: [parentMessageId], references: [id])
+  parentMessageId Int?
+  replies         Message[] @relation("Replies")
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  message   String
+  type      String   // "approved", "deleted", "message"
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  eventId   Int?     // ✅ Bildirimle ilişkili etkinlik ID’si
+  event     Event?   @relation(fields: [eventId], references: [id])
+}

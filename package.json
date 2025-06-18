@@ -1,0 +1,27 @@
+{
+  "name": "kulturist",
+  "version": "1.0.0",
+  "description": "KÜLTÜRİST Projesi: Kültürü birlikte yaşa!",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.8.2",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
+    "next": "^13.4.0",
+    "next-auth": "^4.24.11",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "author": "Nebiye Şule",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.4.0"
+  }
+}
