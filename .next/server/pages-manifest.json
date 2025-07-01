@@ -1,12 +1,1 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/api/events/approved": "pages/api/events/approved.js",
-  "/api/testimonials": "pages/api/testimonials.js",
-  "/api/notifications": "pages/api/notifications.js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/auth/login": "pages/auth/login.js",
-  "/profile": "pages/profile.js"
-}
+{"/_app":"pages/_app.js","/about":"pages/about.html","/admin/events":"pages/admin/events.html","/_error":"pages/_error.js","/admin/dashboard":"pages/admin/dashboard.html","/admin":"pages/admin.html","/admin/testimonials":"pages/admin/testimonials.html","/admin/users":"pages/admin/users.html","/api/admin/testimonials/[id]":"pages/api/admin/testimonials/[id].js","/api/admin/testimonials/[id]/approve":"pages/api/admin/testimonials/[id]/approve.js","/api/admin/testimonials":"pages/api/admin/testimonials.js","/api/admin/users/[id]":"pages/api/admin/users/[id].js","/api/admin/users/[id]/role":"pages/api/admin/users/[id]/role.js","/api/admin/users":"pages/api/admin/users.js","/api/auth/login":"pages/api/auth/login.js","/api/auth/register":"pages/api/auth/register.js","/api/auth/update":"pages/api/auth/update.js","/api/events/[id]":"pages/api/events/[id].js","/api/events/[id]/messages":"pages/api/events/[id]/messages.js","/api/events/approved":"pages/api/events/approved.js","/api/events/approve":"pages/api/events/approve.js","/api/events/create":"pages/api/events/create.js","/api/events/delete":"pages/api/events/delete.js","/api/events":"pages/api/events.js","/api/messages/send":"pages/api/messages/send.js","/api/notifications":"pages/api/notifications.js","/api/notifications/read":"pages/api/notifications/read.js","/api/testimonials":"pages/api/testimonials.js","/auth/login":"pages/auth/login.html","/auth/register":"pages/auth/register.html","/events/[id]":"pages/events/[id].html","/events":"pages/events.html","/events/new":"pages/events/new.html","/":"pages/index.html","/notifications":"pages/notifications.html","/profile":"pages/profile.html","/unauthorized":"pages/unauthorized.html","/api/auth/[...nextauth]":"pages/api/auth/[...nextauth].js","/_document":"pages/_document.js","/404":"pages/404.html"}
