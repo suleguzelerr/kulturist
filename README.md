@@ -55,17 +55,3 @@ Aşağıdaki örnek admin hesabı ile yönetici paneline erişebilirsiniz (sadec
 - **Şifre:** Ns06052005
 
 > Not: İlk kurulumda bu kullanıcılar otomatik olarak oluşmazsa, veritabanına manuel olarak ekleyebilirsiniz veya kayıt formunu kullanarak yeni kullanıcı oluşturabilirsiniz.
-
-## Proje Ekran Görüntüleri
-Aşağıda örnek ekran görüntüleri ekleyebilirsiniz:
-
-![Ana Sayfa](docs/screenshot-home.png)
-![Admin Paneli](docs/screenshot-admin.png)
-
-> Görselleri `docs/` klasörüne ekleyip, yukarıdaki gibi bağlantı verebilirsiniz.
-
-## Katkı Sağlama
-Pull request'ler ve öneriler için lütfen bir issue açın veya doğrudan katkıda bulunun.
-
-## Lisans
-Bu proje MIT lisansı ile lisanslanmıştır. 
